@@ -2,19 +2,16 @@
 
 namespace validation;
 
-class IssetValidation implements Validation
+class IssetValidation extends Validation
 {
-    private $error = 'Строка не может быть пустой';
+    protected $error = 'Строка не может быть пустой';
+    protected $name = 'is_set';
+
 
     public function execute(string $str): bool {
         if(!empty($str)) {
             return true;
         }
         return false;
-    }
-
-    public function getError(): string
-    {
-        return $this->error;
     }
 }

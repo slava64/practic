@@ -2,9 +2,10 @@
 
 namespace validation;
 
-class DateformatValidation implements Validation
+class DateformatValidation extends Validation
 {
-    private $error = 'Строка должна в формате дд.мм.гггг';
+    protected $error = 'Строка должна в формате дд.мм.гггг';
+    protected $name = 'date_format';
 
     private $format = "d.m.Y";
 
@@ -15,9 +16,5 @@ class DateformatValidation implements Validation
         }
 
         return false;
-    }
-
-    public function getError(): string {
-        return $this->error;
     }
 }

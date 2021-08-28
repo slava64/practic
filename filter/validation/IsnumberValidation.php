@@ -2,19 +2,15 @@
 
 namespace validation;
 
-class IsnumberValidation implements Validation
+class IsnumberValidation extends Validation
 {
-    private $error = 'Строка должна быть цифрой';
+    protected $error = 'Строка должна быть цифрой';
+    protected $name = 'is_number';
 
     public function execute(string $str): bool {
         if(is_numeric($str)) {
             return true;
         }
         return false;
-    }
-
-    public function getError(): string
-    {
-        return $this->error;
     }
 }

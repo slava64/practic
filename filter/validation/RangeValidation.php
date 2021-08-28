@@ -2,9 +2,11 @@
 
 namespace validation;
 
-class RangeValidation implements Validation
+class RangeValidation extends Validation
 {
-    private $error = 'Строка не находится в диапазоне {min} - {max}';
+    protected $error = 'Строка не находится в диапазоне {min} - {max}';
+    protected $name = 'range';
+
     private $min;
     private $max;
 

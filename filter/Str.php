@@ -5,14 +5,26 @@ use validation\Validation;
 
 class Str
 {
-    private $text;
+    private $texts = [];
     private $filters = [];
     private $validations = [];
     private $errors = [];
 
-    public function __construct(string $text)
+    public function __construct(array $texts = [])
     {
-        $this->text = $text;
+        $this->texts = $texts;
+    }
+
+    public function addText(string $text) {
+        $this->texts[] = $text;
+    }
+
+    public function getText(int $index): string {
+        return $this->texts[$index];
+    }
+
+    public function getTexts(): array {
+        return $this->texts;
     }
 
     public function addFilter(Filter $filter) {
@@ -35,14 +47,18 @@ class Str
 
     public function filter() {
         foreach ($this->filters as $filter) {
-            $this->text = $filter->execute($this->text);
+            foreach ($this->texts as $i => $text) {
+                $this->texts[$i] = $filter->execute($text);
+            }
         }
     }
 
     public function validation() {
         foreach ($this->validations as $validation) {
-            if($validation->execute($this->text) === false) {
-                $this->errors[] = $validation->getError();
+            foreach ($this->texts as $i => $text) {
+                if($validation->execute($text) === false) {
+                    $this->errors[$i][] = $validation->getError();
+                }
             }
         }
 
@@ -55,10 +71,5 @@ class Str
 
     public function getErrors(): array {
         return $this->errors;
-    }
-
-    public function __toString()
-    {
-        return $this->text;
     }
 }
