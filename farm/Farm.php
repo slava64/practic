@@ -21,6 +21,12 @@ class Farm {
     public function addAnimal(Animal $animal): void {
         $this->animalList[] = $animal;
     }
+
+    public function addAnimals(array $animals): void {
+        foreach ($animals as $animal) {
+            $this->addAnimal($animal);
+        }
+    }
     
     public function getAnimalList(): array {
         return $this->animalList;

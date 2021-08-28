@@ -4,6 +4,9 @@ abstract class BuilderFarm
 {
     protected $farm;
 
+    // длина забора
+    //
+
     public function getFarm() {
         return $this->farm;
     }
@@ -11,6 +14,13 @@ abstract class BuilderFarm
         $this->farm = new Farm($title);
     }
 
-    abstract public function buildAnimal(Animal $animal);
-    abstract public function buildAnimals(array $animals);
+    public function addAnimal(Animal $animal) {
+        $this->farm->addAnimal($animal);
+    }
+
+    public function addAnimals(array $animals) {
+        foreach ($animals as $animal) {
+            $this->addAnimal($animal);
+        }
+    }
 }
