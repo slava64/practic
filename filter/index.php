@@ -40,8 +40,3 @@ foreach ($texts as $i => $text) {
 
     echo "<br/>";
 }
-
-
-
-
-
