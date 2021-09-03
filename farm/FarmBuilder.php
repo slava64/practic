@@ -1,17 +1,17 @@
 <?php
 
 class FarmBuilder {
-    public function build(string $title, int $cowsAmount, int $hensAmount): Farm {
+    protected $cowsAmount;
+    protected $hensAmount;
+
+    public function build(string $title): Farm {
         $farm = new Farm($title);
 
-        //$builderFarm = new BuilderFarmClearpath();
-        //$builderFarm->createFarm($title);
-
         $cowFactory = new CowFactory();
-        $cows = $cowFactory->createAnimals(new Product("Молоко", "л."), $cowsAmount);
+        $cows = $cowFactory->createAnimals(new Product("Молоко", "л."), $this->cowsAmount);
 
         $henFactory = new HenFactory();
-        $hens = $henFactory->createAnimals(new Product("Яйцо", "шт."), $hensAmount);
+        $hens = $henFactory->createAnimals(new Product("Яйцо", "шт."), $this->hensAmount);
 
         $farm->addAnimals(array_merge($cows, $hens));
 
