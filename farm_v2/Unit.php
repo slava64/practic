@@ -2,6 +2,9 @@
 
 class Unit
 {
+    const INTEGER = 0;
+    const FLOAT = 1;
+
     /**
      * @var string
      */
@@ -9,8 +12,6 @@ class Unit
 
     /**
      * @var int
-     * 0 - int
-     * 1 - float
      */
     private $type;
 

@@ -1,10 +1,8 @@
 <?php
 
 class Cow extends Animal {
-    public function __construct(Product $product, int $id) {
-        parent::__construct($product, $id);
+    public function __construct(int $id) {
+        parent::__construct($id);
         $this->title = "Корова";
-        $this->perfomanceMin = 8;
-        $this->perfomanceMax = 12;
     }
 }

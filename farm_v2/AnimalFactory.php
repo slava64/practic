@@ -2,13 +2,13 @@
 
 abstract class AnimalFactory
 {
-    abstract public function createAnimal(Product $product, int $id);
+    abstract public function createAnimal(array $productPerfomanceList, int $id);
 
-    public function createAnimals(Product $product, int $count): array {
-        $animals = [];
+    public function createAnimalList(array $productPerfomanceList, $count): array {
+        $animalList = [];
         for($i = 0; $i < $count; $i++) {
-            $animals[] = $this->createAnimal($product, $i + 1);
+            $animalList[] = $this->createAnimal($productPerfomanceList, $i + 1);
         }
-        return $animals;
+        return $animalList;
     }
 }
