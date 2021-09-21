@@ -10,8 +10,9 @@ class ProductPerfomance
      */
     private $product;
 
-    public function __construct($min, $max)
+    public function __construct(Product $product, $min, $max)
     {
+        $this->product = $product;
         $this->min = $min;
         $this->max = $max;
     }

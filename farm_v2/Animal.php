@@ -28,7 +28,7 @@ class Animal {
         return $this;
     }
 
-    public function getProductPerfomanceList() {
+    public function getProductPerfomanceList(): array {
         return $this->productPerfomanceList;
     }
     

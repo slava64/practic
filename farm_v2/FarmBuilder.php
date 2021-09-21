@@ -14,7 +14,7 @@ abstract class FarmBuilder
         $this->farm = new Farm ($title);
     }
 
-    //abstract public function buildAnimalList();
+    abstract public function buildAnimalList();
     abstract public function buildHouseList();
     abstract public function buildInventoryList();
     abstract public function buildFieldList();

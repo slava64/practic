@@ -1,7 +1,29 @@
 <?php
 
-class MediumFarm extends FarmBuilder
+class MediumFarmBuilder extends FarmBuilder
 {
+    public function buildAnimalList() {
+        $egg = new Product("Яйца", new Unit('шт', Unit::INTEGER));
+        $meat = new Product("Мясо", new Unit('кг', Unit::FLOAT));
+
+        $perfomanceEgg = new ProductPerfomance($egg, "1", "100");
+        $perfomanceMeat = new ProductPerfomance($meat, "1", "100");
+
+        $factory = new HenFactory();
+        $animalList = $factory->createAnimalList([
+            $perfomanceEgg,
+            $perfomanceMeat,
+        ], rand(20, 100));
+
+        $this->getFarm()->addAnimalList($animalList);
+
+        $factory = new CowFactory();
+        $animalList = $factory->createAnimalList([
+            $perfomanceMeat,
+        ], rand(1, 10));
+
+        $this->getFarm()->addAnimalList($animalList);
+    }
     public function buildHouseList() {
         $factory = new StoneFactory();
         $houseList = $factory->createHouseList(rand(1, 3));

@@ -2,7 +2,7 @@
 
 class CowFactory extends AnimalFactory
 {
-    public function createAnimal(int $id, array $productPerfomanceList): Animal {
+    public function createAnimal(array $productPerfomanceList, int $id): Animal {
         $cow = new Cow($id);
         foreach ($productPerfomanceList as $productPerfomance) {
             $cow->addProductPerfomance($productPerfomance);

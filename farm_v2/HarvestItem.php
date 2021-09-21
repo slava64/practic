@@ -6,35 +6,36 @@ class HarvestItem {
      * @var Animal
      */
     protected $animal;
-    
+
     /**
-     * 
-     * @var int
+     * @var array
      */
-    protected $amount;
+    protected $harvestProductList;
     
-    public function __construct(Animal $animal, int $amount) {
+    public function __construct(Animal $animal) {
         $this->animal = $animal;
-        $this->amount = $amount;
+        $this->harvestProductList = [];
     }
 
     public function getAnimal(): Animal {
         return $this->animal;
     }
 
-    public function getAmount(): int {
-        return $this->amount;
+    public function addHarvestProduct(HarvestProduct $product) {
+        $this->harvestProductList[] = $product;
     }
 
-    public function getProduct() {
-        return $this->animal->getProduct();
+    public function getHarvestProductList(): array {
+        return $this->harvestProductList;
     }
 
-    public function getProductName() {
-        return $this->getProduct()->getName();
+    public function getHarvestProduct(): string {
+        return implode(", ", $this->harvestProductList);
     }
 
-    public function getProductUnit() {
-        return $this->getProduct()->getUnit();
+
+    public function __toString()
+    {
+        return $this->animal->getTitle().' #'.$this->animal->getId().': '.$this->getHarvestProduct();
     }
 }

@@ -29,4 +29,9 @@ class Harvest {
     public function getFarm(): Farm {
         return $this->farm;
     }
+
+    public function __toString()
+    {
+        return $this->getFarm()."\r\n".implode("\r\n", $this->getItems());
+    }
 }
