@@ -41,6 +41,13 @@ class Animal {
     public function setTitle(string $title): void {
         $this->title = $title;
     }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id) {
+        $this->id = $id;
+    }
         
     public function getId(): int {
         return $this->id;
@@ -53,6 +60,4 @@ class Animal {
             $this->getId()
         );
     }
-
-
 }

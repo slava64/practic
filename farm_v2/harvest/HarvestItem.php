@@ -17,6 +17,7 @@ class HarvestItem {
     protected $harvestProductList;
     
     public function __construct(Animal $animal) {
+
         $this->animal = $animal;
         $this->harvestProductList = [];
     }
@@ -33,13 +34,13 @@ class HarvestItem {
         return $this->harvestProductList;
     }
 
-    public function getHarvestProduct(): string {
+    public function getStringHarvestProduct(): string {
         return implode(", ", $this->harvestProductList);
     }
 
 
     public function __toString()
     {
-        return $this->animal->getTitle().' #'.$this->animal->getId().': '.$this->getHarvestProduct();
+        return $this->animal->getTitle().' #'.$this->animal->getId().': '.$this->getStringHarvestProduct();
     }
 }

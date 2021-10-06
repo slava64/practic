@@ -30,6 +30,6 @@ class HarvestProduct {
 
     public function __toString()
     {
-        return $this->product->getName().' - '.$this->amount.' '.$this->product->getUnit()->getName().'.';
+        return $this->getProduct()->getName().' - '.$this->getAmount().' '.$this->getProduct()->getUnit()->getName().'.';
     }
 }
