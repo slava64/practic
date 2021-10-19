@@ -8,12 +8,7 @@
  */
 class FileLoader extends LoaderAdapter
 {
-    const GET = 'GET';
-    const POST = 'POST';
-
-    private $optionList;
-
-    public function run(string $url) {
+    public function getContent(string $url) {
         $opts = [];
         foreach ($this->optionList as $key => $value) {
             $opts['http'][$key] = $value;
@@ -21,9 +16,11 @@ class FileLoader extends LoaderAdapter
         $context = stream_context_create($opts);
         $stream = fopen($url, 'r', false, $context);
 
-        var_dump(stream_get_meta_data($stream)); // header
-        var_dump(stream_get_contents($stream)); // content
+        //var_dump(stream_get_meta_data($stream)); // header
+        $result = stream_get_contents($stream); // content
         fclose($stream);
+
+        return $result;
     }
 
     public function setMethod(string $method = self::GET) {

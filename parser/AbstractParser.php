@@ -8,6 +8,14 @@
  */
 abstract class AbstractParser
 {
-    abstract public function run();
+    protected $urlList;
+
+    abstract public function run(string $page);
+
+    abstract protected function getHost():string;
+
+    abstract public function getObjectUrlList(string $page);
+
+    abstract public function getSourceUrlList():array;
 
 }

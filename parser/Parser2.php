@@ -8,7 +8,24 @@
  */
 class Parser2 extends AbstractParser
 {
-    public function run() {
-        return "parser 2";
+    public function run(string $page)
+    {
+        // TODO: Implement run() method.
     }
+
+    protected function getHost(): string
+    {
+        // TODO: Implement getHost() method.
+    }
+
+    public function getObjectUrlList(string $page)
+    {
+        // TODO: Implement getObjectUrlList() method.
+    }
+
+    public function getSourceUrlList(): array
+    {
+        // TODO: Implement getSourceUrlList() method.
+    }
+
 }

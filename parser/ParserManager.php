@@ -12,7 +12,29 @@ class ParserManager
     private $loader;
 
     public function run() {
+        /** @var $parser AbstractParser */
+        foreach($this->parserList as $parser) {
+            $sourceUrlList = $parser->getSourceUrlList();
+            $this->runSourceUrlList($sourceUrlList, $parser);
+        }
     }
+
+    private function runSourceUrlList(array $sourceUrlList, AbstractParser $parser) {
+        foreach ($sourceUrlList as $sourceUrl) {
+            $newsListPage = $this->loader->run($sourceUrl);
+            $objectUrlList = $parser->getObjectUrlList($newsListPage);
+
+            $this->runObjectUrlList($objectUrlList, $parser);
+        }
+    }
+
+    private function runObjectUrlList(array $objectUrlList, AbstractParser $parser) {
+        foreach ($objectUrlList as $objectUrl) {
+            $newsPage = $this->loader->run($objectUrl);
+            $newsObject = $parser->run($newsPage);
+        }
+    }
+
 
     public function addParser(AbstractParser $parser) {
         $this->parserList[] = $parser;

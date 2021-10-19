@@ -15,8 +15,7 @@
 
 class CurlLoader extends LoaderAdapter
 {
-    public function run(string $url) {
-
+    public function getContent(string $url) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -25,7 +24,8 @@ class CurlLoader extends LoaderAdapter
         }
         $result = curl_exec($ch);
         curl_close($ch);
-        var_dump($result);
+
+        return $result;
     }
 
     public function setMethod(string $method = self::GET) {
