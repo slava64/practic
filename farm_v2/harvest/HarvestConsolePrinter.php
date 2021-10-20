@@ -76,21 +76,23 @@ class HarvestConsolePrinter
         return $text;
     }
 
-    private function printStr(string $str, int $widthColumn, int $alignment): string {
-        if($alignment == self::ALIGMENT_LEFT) { // выравнивание по левому краю
+    private function printStr(string $str, int $widthColumn, int $alignment): string
+    {
+        if ($alignment == self::ALIGMENT_LEFT) { // выравнивание по левому краю
             return $str . $this->printSymbol(" ", $widthColumn - strlen($str));
         } elseif ($alignment == self::ALIGMENT_RIGHT) { // выравнивание по правому краю
             return $this->printSymbol(" ", $widthColumn - strlen($str)) . $str;
-        } elseif($alignment == self::ALIGMENT_CENTER) { // выравнивание по центру краю
+        } elseif ($alignment == self::ALIGMENT_CENTER) { // выравнивание по центру краю
             $countSymbolCenter = floor($widthColumn / 2) - floor(strlen($str) / 2);
             return $this->printSymbol(" ", $countSymbolCenter) . $str . $this->printSymbol(" ", $countSymbolCenter);
         }
         return '';
     }
 
-    private function printSymbol(string $str, int $count): string {
+    private function printSymbol(string $str, int $count): string
+    {
         $line = '';
-        for($i = 0; $i < $count; $i++) {
+        for ($i = 0; $i < $count; $i++) {
             $line .= $str;
         }
         return $line;

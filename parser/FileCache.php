@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: slava
@@ -9,9 +10,9 @@ class FileCache extends Cache
 {
     public function get(string $key): string
     {
-        if(is_file($key)) {
+        if (is_file($key)) {
             $content = file_get_contents($key);
-            if($content['ttl'] < time()) {
+            if ($content['ttl'] < time()) {
                 return $content['value'];
             } else {
                 unlink($key);

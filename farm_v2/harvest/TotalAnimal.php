@@ -9,10 +9,11 @@ class TotalAnimal
 {
     private $data;
 
-    public function add(Animal $animal, Product $product, $amount) {
+    public function add(Animal $animal, Product $product, $amount)
+    {
         $animalName = (string)$animal;
         $productName = $product->getName();
-        if(empty($this->data[$animalName][$productName])) {
+        if (empty($this->data[$animalName][$productName])) {
             $this->data[$animalName][$productName] = 0;
         }
         $this->data[$animalName][$productName] += $amount;

@@ -16,8 +16,8 @@ class DbCache extends Cache
         $query = sprintf("SELECT * FROM cache WHERE key='%s' LIMIT 1",
             $this->mysqli->real_escape_string($key));
         $result = $this->mysqli->query($query);
-        if($row = $result->fetch_assoc()) {
-            if($row['ttl'] < time()) {
+        if ($row = $result->fetch_assoc()) {
+            if ($row['ttl'] < time()) {
                 return $row['value'];
             }
         }

@@ -17,15 +17,16 @@ abstract class LoaderAdapter
     /** @var Cache $cache */
     protected $cache = null;
 
-    public function run(string $url) {
-        if(!empty($this->cache)) {
-            if(!empty($this->cache->get($url))) {
+    public function run(string $url)
+    {
+        if (!empty($this->cache)) {
+            if (!empty($this->cache->get($url))) {
                 return $this->cache->get($url);
             }
         }
         $content = $this->getContent($url);
 
-        if(!empty($this->cache)) {
+        if (!empty($this->cache)) {
             $this->cache->set($url, $content, self::TIME_CACHE);
         }
         return $content;
@@ -51,18 +52,23 @@ abstract class LoaderAdapter
         $this->setMethod(self::GET);
     }
 
-    protected function setCache(Cache $cache): void {
+    protected function setCache(Cache $cache): void
+    {
         $this->cache = $cache;
     }
 
-    protected function addOption(string $name, $value) {
+    protected function addOption(string $name, $value)
+    {
         $this->optionList[$name] = $value;
     }
 
-    protected function isGet(string $method) {
+    protected function isGet(string $method)
+    {
         return $method == self::GET;
     }
-    protected function isPost(string $method) {
+
+    protected function isPost(string $method)
+    {
         return $method == self::POST;
     }
 }

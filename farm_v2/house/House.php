@@ -12,11 +12,13 @@ class House
         $this->id = $id;
     }
 
-    public function setTitle(string $title) {
+    public function setTitle(string $title)
+    {
         $this->title = $title;
     }
 
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 }

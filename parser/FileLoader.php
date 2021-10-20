@@ -8,7 +8,8 @@
  */
 class FileLoader extends LoaderAdapter
 {
-    public function getContent(string $url) {
+    public function getContent(string $url)
+    {
         $opts = [];
         foreach ($this->optionList as $key => $value) {
             $opts['http'][$key] = $value;
@@ -23,31 +24,37 @@ class FileLoader extends LoaderAdapter
         return $result;
     }
 
-    public function setMethod(string $method = self::GET) {
-        if($this->isGet($method)) {
+    public function setMethod(string $method = self::GET)
+    {
+        if ($this->isGet($method)) {
             $this->addOption('method', $method);
-        } elseif($this->isPost($method)) {
+        } elseif ($this->isPost($method)) {
             $this->addOption('method', $method);
         }
     }
 
-    public function setHeader($header) {
+    public function setHeader($header)
+    {
         $this->addOption('header', $header);
     }
 
-    public function setContent(string $content) {
+    public function setContent(string $content)
+    {
         $this->addOption('content', $content);
     }
 
-    public function setFollowLocation(int $value = 0) {
+    public function setFollowLocation(int $value = 0)
+    {
         $this->addOption('max_redirects', $value);
     }
 
-    public function setIgnoreErrors(bool $value) {
+    public function setIgnoreErrors(bool $value)
+    {
         $this->addOption('ignore_errors', $value);
     }
 
-    public function setTimeout(int $value) {
+    public function setTimeout(int $value)
+    {
         $this->addOption('timeout', $value);
     }
 }

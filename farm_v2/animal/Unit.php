@@ -23,11 +23,13 @@ class Unit
         $this->type = $type;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 

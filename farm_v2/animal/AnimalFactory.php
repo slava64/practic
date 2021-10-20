@@ -9,14 +9,16 @@ abstract class AnimalFactory
 
     abstract public function createEmptyAnimal();
 
-    public function cloneAnimal() {
-        if(empty($this->empty_animal)) {
+    public function cloneAnimal()
+    {
+        if (empty($this->empty_animal)) {
             $this->empty_animal = $this->createEmptyAnimal();
         }
         return clone $this->empty_animal;
     }
 
-    public function createAnimal(array $productPerfomanceList, int $id): Animal {
+    public function createAnimal(array $productPerfomanceList, int $id): Animal
+    {
         $animal = $this->cloneAnimal();
         $animal->setId($id);
 
@@ -26,9 +28,10 @@ abstract class AnimalFactory
         return $animal;
     }
 
-    public function createAnimalList(array $productPerfomanceList, $count): array {
+    public function createAnimalList(array $productPerfomanceList, $count): array
+    {
         $animalList = [];
-        for($i = 0; $i < $count; $i++) {
+        for ($i = 0; $i < $count; $i++) {
             $animalList[] = $this->createAnimal($productPerfomanceList, $i + 1);
         }
         return $animalList;

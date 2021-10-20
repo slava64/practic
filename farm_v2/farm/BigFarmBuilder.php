@@ -18,7 +18,8 @@ use farm_v2\field\CornFactory;
 
 class BigFarmBuilder extends FarmBuilder
 {
-    public function buildAnimalList() {
+    public function buildAnimalList()
+    {
         $egg = new Product("Яйца", new Unit('шт', Unit::INTEGER));
         $meat = new Product("Мясо", new Unit('кг', Unit::FLOAT));
         $milk = new Product("Молоко", new Unit('л', Unit::FLOAT));
@@ -43,7 +44,9 @@ class BigFarmBuilder extends FarmBuilder
 
         $this->getFarm()->addAnimalList($animalList);
     }
-    public function buildHouseList() {
+
+    public function buildHouseList()
+    {
         $factory = new StoneFactory();
         $houseList = $factory->createHouseList(rand(1, 5));
         $this->getFarm()->addHouseList($houseList);
@@ -52,7 +55,9 @@ class BigFarmBuilder extends FarmBuilder
         $houseList = $factory->createHouseList(rand(1, 20));
         $this->getFarm()->addHouseList($houseList);
     }
-    public function buildInventoryList() {
+
+    public function buildInventoryList()
+    {
         $factory = new HarvesterFactory();
         $inventoryList = $factory->createInventoryList(rand(1, 3));
         $this->getFarm()->addInventoryList($inventoryList);
@@ -65,7 +70,9 @@ class BigFarmBuilder extends FarmBuilder
         $inventoryList = $factory->createInventoryList(rand(1, 30));
         $this->getFarm()->addInventoryList($inventoryList);
     }
-    public function buildFieldList() {
+
+    public function buildFieldList()
+    {
         $factory = new PotatoFactory();
         $fieldList = $factory->createFieldList(rand(1, 5));
         $this->getFarm()->addFieldList($fieldList);

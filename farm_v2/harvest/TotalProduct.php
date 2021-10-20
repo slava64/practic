@@ -9,9 +9,10 @@ class TotalProduct
 {
     private $data;
 
-    public function add(Product $product, $amount) {
+    public function add(Product $product, $amount)
+    {
         $productName = $product->getName();
-        if(empty($this->data[$productName])) {
+        if (empty($this->data[$productName])) {
             $this->data[$productName] = 0;
         }
         $this->data[$productName] += $amount;

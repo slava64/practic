@@ -17,8 +17,8 @@ $farmBuilder->buildAnimalList();
 
 $harvestGatherer = new HarvestGatherer($farmBuilder->getFarm());
 
-for($i = 0; $i < 1; $i++) {
-    $harvestGatherer->getHarvest(date("Y-m-d", time() + 60*60*24*$i));
+for ($i = 0; $i < 1; $i++) {
+    $harvestGatherer->getHarvest(date("Y-m-d", time() + 60 * 60 * 24 * $i));
     //echo $printer->printReport();
     //echo "\n\n";
 }

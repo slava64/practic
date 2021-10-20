@@ -15,7 +15,8 @@
 
 class CurlLoader extends LoaderAdapter
 {
-    public function getContent(string $url) {
+    public function getContent(string $url)
+    {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -28,31 +29,37 @@ class CurlLoader extends LoaderAdapter
         return $result;
     }
 
-    public function setMethod(string $method = self::GET) {
-        if($this->isGet($method)) {
+    public function setMethod(string $method = self::GET)
+    {
+        if ($this->isGet($method)) {
             $this->addOption(CURLOPT_HTTPGET, true);
-        } elseif($this->isPost($method)) {
+        } elseif ($this->isPost($method)) {
             $this->addOption(CURLOPT_POST, true);
         }
     }
 
-    public function setHeader($header) {
+    public function setHeader($header)
+    {
         $this->addOption(CURLOPT_HTTPHEADER, $header);
     }
 
-    public function setContent(string $content) {
+    public function setContent(string $content)
+    {
         $this->addOption(CURLOPT_POSTFIELDS, $content);
     }
 
-    public function setFollowLocation(int $value = 0) {
+    public function setFollowLocation(int $value = 0)
+    {
         $this->addOption(CURLOPT_FOLLOWLOCATION, $value);
     }
 
-    public function setIgnoreErrors(bool $value) {
+    public function setIgnoreErrors(bool $value)
+    {
         $this->addOption('ignore_errors', $value);
     }
 
-    public function setTimeout(int $value) {
+    public function setTimeout(int $value)
+    {
         $this->addOption(CURLOPT_TIMEOUT, $value);
     }
 }
