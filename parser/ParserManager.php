@@ -5,6 +5,9 @@
  * User: slava
  * Date: 11.10.2021
  * Time: 15:40
+ *
+ * Добавить метод создания парсеров из строки используя паттерн приспособленец (ParserManagerFactory)
+ *
  */
 class ParserManager
 {
@@ -38,6 +41,21 @@ class ParserManager
         }
     }
 
+    public function addParserString(string $parserName)
+    {
+        switch ($parserName)
+        {
+            case 'parser1':
+                $this->parserList[] = new Parser1();
+                break;
+            case 'parser2':
+                $this->parserList[] = new Parser2();
+                break;
+            case 'parser3':
+                $this->parserList[] = new Parser3();
+                break;
+        }
+    }
 
     public function addParser(AbstractParser $parser)
     {

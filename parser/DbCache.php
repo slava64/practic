@@ -32,4 +32,9 @@ class DbCache extends Cache
         $this->mysqli->query($query);
     }
 
+    public function has(string $key): bool
+    {
+        // TODO: Implement has() method.
+    }
+
 }

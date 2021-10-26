@@ -11,4 +11,6 @@ abstract class Cache
     abstract public function get(string $key): string;
 
     abstract public function set(string $key, string $value, int $ttl = 0);
+
+    abstract public function has(string $key): bool;
 }

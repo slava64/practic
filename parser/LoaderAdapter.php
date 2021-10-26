@@ -19,14 +19,14 @@ abstract class LoaderAdapter
 
     public function run(string $url)
     {
-        if (!empty($this->cache)) {
-            if (!empty($this->cache->get($url))) {
-                return $this->cache->get($url);
-            }
+        $isCache = $this->cache && $this->cache instanceof Cache;
+
+        if ($isCache && $this->cache->has($url)) {
+            return $this->cache->get($url);
         }
         $content = $this->getContent($url);
 
-        if (!empty($this->cache)) {
+        if ($isCache) {
             $this->cache->set($url, $content, self::TIME_CACHE);
         }
         return $content;

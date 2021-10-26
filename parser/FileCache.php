@@ -28,4 +28,9 @@ class FileCache extends Cache
         file_put_contents($key, serialize(['ttl' => $time, 'value' => $value]));
     }
 
+    public function has(string $key): bool
+    {
+        // TODO: Implement has() method.
+    }
+
 }
