@@ -14,13 +14,26 @@ class ParserManager
     private $parserList;
     private $loader;
 
+    public function getParserList()
+    {
+        return $this->parserList;
+    }
+
     public function run()
     {
         /** @var $parser AbstractParser */
         foreach ($this->parserList as $parser) {
-            $sourceUrlList = $parser->getSourceUrlList();
-            $this->runSourceUrlList($sourceUrlList, $parser);
+            $this->runOne($parser);
         }
+    }
+
+    public function runOne(AbstractParser $parser)
+    {
+        if($parser instanceof ParserEmpty) {
+            return;
+        }
+        $sourceUrlList = $parser->getSourceUrlList();
+        $this->runSourceUrlList($sourceUrlList, $parser);
     }
 
     private function runSourceUrlList(array $sourceUrlList, AbstractParser $parser)
@@ -53,6 +66,9 @@ class ParserManager
                 break;
             case 'parser3':
                 $this->parserList[] = new Parser3();
+                break;
+            default:
+                $this->parserList[] = new ParserEmpty();
                 break;
         }
     }

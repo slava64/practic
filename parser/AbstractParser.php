@@ -9,6 +9,9 @@
 abstract class AbstractParser
 {
     protected $urlList;
+    protected $name;
+
+    abstract public function getName(): string;
 
     abstract public function run(string $page);
 
