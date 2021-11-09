@@ -17,9 +17,4 @@ class CheeseTopping extends Topping
     {
         return 10;
     }
-
-    public function getCount()
-    {
-        return 3;
-    }
 }

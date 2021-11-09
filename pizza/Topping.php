@@ -8,9 +8,20 @@
  */
 abstract class Topping
 {
+    protected $count;
+
+    public function getCount(): int
+    {
+        return $this->count;
+    }
+
+    public function setCount(int $count)
+    {
+        $this->count = $count;
+    }
+
     abstract public function getName();
     abstract public function getPrice();
-    abstract public function getCount();
 
     public function getPriceAll()
     {

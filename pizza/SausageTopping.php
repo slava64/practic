@@ -17,9 +17,4 @@ class SausageTopping extends Topping
     {
         return 40;
     }
-
-    public function getCount()
-    {
-        return 4;
-    }
 }

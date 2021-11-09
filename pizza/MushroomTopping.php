@@ -17,9 +17,4 @@ class MushroomTopping extends Topping
     {
         return 40;
     }
-
-    public function getCount()
-    {
-        return 1;
-    }
 }

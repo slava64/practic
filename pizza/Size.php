@@ -11,11 +11,6 @@ abstract class Size
     abstract public function getName();
     abstract public function getRate();
 
-    public function getPrice(float $price): float
-    {
-        return $this->getRate() * $price;
-    }
-
     public function getInfo()
     {
         return 'Размер: ' . $this->getName();
