@@ -38,7 +38,7 @@ abstract class CarrierChain
     {
         $pizzaOrder = $this->setPizzaOrder($pizzaOrder);
         if ($this->nextCarrier) {
-            return $this->nextCarrier->setPizzaOrder($pizzaOrder);
+            return $this->nextCarrier->handler($pizzaOrder);
         }
         return null;
     }
