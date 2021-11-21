@@ -78,6 +78,13 @@ class PizzaItem
     }
 
 
-
+    public function getInfo(): string
+    {
+        $info = "Название: " . $this->getName() . "\r\n";
+        $info .= "Цена: " . $this->getPrice() . "\r\n";
+        $info .= "Кол-во: " . $this->getCount() . "\r\n";
+        $info .= "Сумма: " . $this->getTotal() . "\r\n";
+        return $info;
+    }
 
 }

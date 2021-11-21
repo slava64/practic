@@ -15,18 +15,13 @@ class PizzaOrder
         $this->pizzaList[] = $pizza;
     }
 
-    public function getPrice()
-    {
-        $price = 0;
-        /** @var Pizza $pizza */
-        foreach ($this->pizzaList as $pizza) {
-            $price += $pizza->getPrice();
-        }
-        return $price;
-    }
-
     public function getPizzaList()
     {
-        return $this->getPizzaList();
+        return $this->pizzaList;
+    }
+
+    public function getPrice(Price $price)
+    {
+        return $price->getBase($this);
     }
 }

@@ -12,10 +12,12 @@ class Pizza
     private $size;
     private $pastry;
     private $toppingList;
+    private $itemList;
 
     public function __construct()
     {
         $this->toppingList = [];
+        $this->itemList = [];
     }
 
     public function addType(Type $type) {
@@ -32,6 +34,14 @@ class Pizza
 
     public function getSize(): Size {
         return $this->size;
+    }
+
+    public function getItemList(): array
+    {
+        if(empty($this->itemList)) {
+            $this->buildItemList();
+        }
+        return $this->itemList;
     }
 
     public function addPastry(Pastry $pastry) {
@@ -58,31 +68,40 @@ class Pizza
         return $info;
     }
 
-    public function getItemList()
+    private function buildItemMainList()
     {
-        $itemList = [];
-
         $item = new PizzaItem();
         $item->setName($this->getType()->getName() . ' - ' . $this->getSize()->getName());
         $price = $this->getBasePrice();
         $item->setPrice($price);
         $item->setCount(1);
-        $item->setPrice($price);
-        $itemList[] = $item;
+        $item->setTotal($price);
+        $this->itemList[] = $item;
+    }
 
+    private function buildItemToppingList()
+    {
         $toppingList = $this->getToppingList();
         /** @var Topping $topping */
         foreach ($toppingList as $topping) {
-            $item = new PizzaItem();
-            $item->setName($topping->getName());
-            $item->setPrice($topping->getPrice());
-            $item->setCount($topping->getCount());
-            $item->setPrice($topping->getPriceAll());
-
-            $itemList[] = $item;
+            $this->buildItemTopping($topping);
         }
+    }
 
-        return $itemList;
+    private function buildItemTopping(Topping $topping)
+    {
+        $item = new PizzaItem();
+        $item->setName($topping->getName());
+        $item->setPrice($topping->getPrice());
+        $item->setCount($topping->getCount());
+        $item->setTotal($topping->getPriceAll());
+        $this->itemList[] = $item;
+    }
+
+    private function buildItemList()
+    {
+        $this->buildItemMainList();
+        $this->buildItemToppingList();
     }
 
     public function getPrice() {
