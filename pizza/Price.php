@@ -6,6 +6,10 @@
  * Date: 21.11.2021
  * Time: 2:19
  */
+use pizza\discount\AmountDiscount;
+use pizza\discount\BaseDiscount;
+use pizza\discount\SumDiscount;
+
 class Price
 {
     const DISCOUNT_SUM_1 = 1000;
@@ -13,6 +17,8 @@ class Price
 
     const DISCOUNT_SUM_2 = 2000;
     const PERCENT_2 = 20;
+
+    const COUNT_PIZZA_DISCOUNT = 2;
 
     public function getBase(PizzaOrder $pizzaOrder)
     {
@@ -26,28 +32,27 @@ class Price
     }
 
     // При покупке двух пицц третья (самая дешёвая) бесплатно
-    public function getDiscount1(PizzaOrder $pizzaOrder)
+    public function getAmountDiscount(PizzaOrder $pizzaOrder)
     {
         $pizzaList = $pizzaOrder->getPizzaList();
-        $minPrice = 0;
-        if (count($pizzaList) > 2) {
-            /** @var Pizza $pizza */
-            foreach ($pizzaList as $pizza) {
-                if($minPrice == 0) {
-                    $minPrice = $pizza->getPrice();
-                }
-                if($pizza->getPrice() < $minPrice) {
-                    $minPrice = $pizza->getPrice();
-                }
-            }
+        if(count($pizzaList) > 5) {
+            $amountDiscount = new AmountDiscount($pizzaOrder);
+            $amountDiscount->setCountFree(2);
+            return $amountDiscount->calc();
+        } elseif (count($pizzaList) > 3) {
+            $amountDiscount = new AmountDiscount($pizzaOrder);
+            $amountDiscount->setCountFree(1);
+            return $amountDiscount->calc();
         }
-        return $this->getBase($pizzaOrder) - $minPrice;
+        $baseDiscount = new BaseDiscount($pizzaOrder);
+        return $baseDiscount->calc();
     }
 
     // При покупке от 1000 рублей скидка 10%, при покупке от 2000 рублей - 20%
-    public function getDiscount2(PizzaOrder $pizzaOrder)
+    public function getSumDiscount(PizzaOrder $pizzaOrder)
     {
-        $basePrice = $this->getBase($pizzaOrder);
+        $baseDiscount = new BaseDiscount($pizzaOrder);
+        $basePrice = $baseDiscount->calc();
         if ($basePrice > self::DISCOUNT_SUM_2) {
             return $basePrice - $basePrice / 100 * self::PERCENT_2;
         } else if ($basePrice > self::DISCOUNT_SUM_1) {

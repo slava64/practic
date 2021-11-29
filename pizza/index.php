@@ -4,9 +4,14 @@ spl_autoload_register(function ($class) {
     require_once $class . ".php";
 });
 
-$pizzaOrderBuilder = new PizzaOrderBuilder();
+$pizzaOrder = new PizzaOrder();
+$pizzaOrderBuilder = new PizzaOrderBuilder($pizzaOrder);
 $pizzaOrderBuilder->build();
 $pizzaList = $pizzaOrderBuilder->getOrder()->getPizzaList();
+
+$baseDiscount = new \pizza\discount\AmountDiscount($pizzaOrder);
+echo $pizzaOrderBuilder->getOrder()->getPrice($baseDiscount);
+exit;
 
 /** @var Pizza $pizza */
 foreach ($pizzaList as $pizza) {
@@ -19,5 +24,8 @@ foreach ($pizzaList as $pizza) {
     echo "Общая стоимость: " . $pizza->getPrice() . "\r\n" . "\r\n";
     //var_dump($pizza->getItemList()) . "\r\n";
 }
+
+
+
 
 //echo $pizzaOrderBuilder->getOrder()->getPrice();

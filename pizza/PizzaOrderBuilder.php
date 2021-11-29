@@ -10,9 +10,9 @@ class PizzaOrderBuilder
 {
     protected $order;
 
-    public function __construct()
+    public function __construct(PizzaOrder $pizzaOrder)
     {
-        $this->order = new PizzaOrder();
+        $this->order = $pizzaOrder;
     }
 
     public function getOrder(): PizzaOrder
