@@ -9,7 +9,6 @@
 namespace pizza\discount;
 
 use \PizzaOrder;
-use \Pizza;
 
 class BaseDiscount
 {
@@ -17,11 +16,6 @@ class BaseDiscount
      * @var PizzaOrder
      */
     private $pizzaOrder;
-
-    public function __construct(PizzaOrder $pizzaOrder)
-    {
-        $this->pizzaOrder = $pizzaOrder;
-    }
 
     /**
      * @return PizzaOrder
@@ -41,12 +35,6 @@ class BaseDiscount
 
     public function calc()
     {
-        $price = 0;
-        $pizzaList = $this->getPizzaOrder()->getPizzaList();
-        /** @var Pizza $pizza */
-        foreach ($pizzaList as $pizza) {
-            $price += $pizza->getPrice();
-        }
-        return $price;
+        return 0;
     }
 }

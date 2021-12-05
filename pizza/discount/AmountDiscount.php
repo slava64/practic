@@ -16,33 +16,36 @@ class AmountDiscount extends BaseDiscount
     private $countFree;
 
     /**
-     * @return int
+     * @var int
      */
-    public function getCountFree()
-    {
-        return $this->countFree;
-    }
+    private $countTotal;
 
     /**
+     * AmountDiscount constructor.
      * @param int $countFree
+     * @param int $countTotal
      */
-    public function setCountFree($countFree)
+    public function __construct($countFree, $countTotal)
     {
         $this->countFree = $countFree;
+        $this->countTotal = $countTotal;
     }
 
     public function calc()
     {
         $pizzaList = $this->getPizzaOrder()->getPizzaList();
-        $priceArr = [];
-        /** @var \Pizza $pizza */
-        foreach ($pizzaList as $pizza) {
-            $priceArr[] = $pizza->getPrice();
-        }
-        sort($priceArr);
-        $priceArr = array_slice($priceArr, 0, $this->getCountFree());
-        $sumPrice = array_sum($priceArr);
+        if(count($pizzaList) > $this->countTotal) {
+            $priceArr = [];
+            /** @var \Pizza $pizza */
+            foreach ($pizzaList as $pizza) {
+                $priceArr[] = $pizza->getPrice();
+            }
+            sort($priceArr);
+            $priceArr = array_slice($priceArr, 0, $this->countFree);
+            $sumPrice = array_sum($priceArr);
 
-        return parent::calc() - $sumPrice;
+            return $sumPrice * floor(count($pizzaList) / $this->countTotal);
+        }
+        return 0;
     }
 }

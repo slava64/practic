@@ -8,7 +8,20 @@
  */
 class PizzaOrder
 {
+    /**
+     * @var array
+     */
     private $pizzaList;
+
+    /**
+     * @var \pizza\discount\BaseDiscount
+     */
+    private $discount;
+
+    public function __construct()
+    {
+        $this->discount = new \pizza\discount\BaseDiscount();
+    }
 
     public function addPizza(Pizza $pizza)
     {
@@ -20,7 +33,34 @@ class PizzaOrder
         return $this->pizzaList;
     }
 
-    public function getPrice(\pizza\discount\BaseDiscount $baseDiscount)
+    public function getPrice()
+    {
+        $price = 0;
+        $pizzaList = $this->getPizzaList();
+        /** @var Pizza $pizza */
+        foreach ($pizzaList as $pizza) {
+            $price += $pizza->getPrice();
+        }
+        return $price;
+    }
+
+    public function setDiscount(\pizza\discount\BaseDiscount $discount)
+    {
+        $this->discount = $discount;
+        $this->discount->setPizzaOrder($this);
+    }
+
+    public function getDiscount()
+    {
+        return $this->discount->calc();
+    }
+
+    public function getPriceWithDiscount()
+    {
+        return $this->getPrice() - $this->getDiscount();
+    }
+
+    /*public function getPrice(\pizza\discount\BaseDiscount $baseDiscount)
     {
         if ($baseDiscount instanceof \pizza\discount\AmountDiscount) {
             $pizzaList = $this->getPizzaList();
@@ -42,5 +82,5 @@ class PizzaOrder
         } else {
             return $baseDiscount->calc();
         }
-    }
+    }*/
 }

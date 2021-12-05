@@ -21,43 +21,23 @@ class SumDiscount extends BaseDiscount
     private $percent;
 
     /**
-     * @return int
-     */
-    public function getSum()
-    {
-        return $this->sum;
-    }
-
-    /**
+     * SumDiscount constructor.
      * @param int $sum
-     */
-    public function setSum($sum)
-    {
-        $this->sum = $sum;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPercent()
-    {
-        return $this->percent;
-    }
-
-    /**
      * @param int $percent
      */
-    public function setPercent($percent)
+    public function __construct($sum, $percent)
     {
+        $this->sum = $sum;
         $this->percent = $percent;
     }
 
     public function calc()
     {
-        $basePrice = parent::calc();
-        if ($basePrice > $this->getSum()) {
-            return $basePrice - $basePrice / 100 * $this->getPercent();
+        $basePrice = $this->getPizzaOrder()->getPrice();
+        if ($basePrice > $this->sum) {
+            $sumPrice = $basePrice / 100 * $this->percent;
+            return $sumPrice * floor($basePrice / $this->sum);
         }
-        return $basePrice;
+        return 0;
     }
 }
