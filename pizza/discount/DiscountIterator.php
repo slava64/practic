@@ -31,6 +31,18 @@ class DiscountIterator
         $this->position = 0;
     }
 
+    public function setDiscountList(array $discountList)
+    {
+        foreach ($discountList as $discount) {
+            $this->addDiscountList($discount);
+        }
+    }
+
+    public function addDiscountList(BaseDiscount $discount)
+    {
+        $this->discountList[] = $discount;
+    }
+
     public function hasNext()
     {
         if($this->position < count($this->discountList)) {
@@ -41,6 +53,13 @@ class DiscountIterator
 
     public function next(): BaseDiscount
     {
+        if($this->position > 0 &&
+            $this->discountList[$this->position - 1]->calc() > $this->discountList[$this->position]->calc()
+        ) {
+            $discount = $this->discountList[$this->position];
+            $this->discountList[$this->position] = $this->discountList[$this->position - 1];
+            $this->discountList[$this->position - 1] = $discount;
+        }
         $discount = $this->discountList[$this->position];
         $this->position++;
         return $discount;

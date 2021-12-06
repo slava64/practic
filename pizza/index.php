@@ -9,16 +9,19 @@ $pizzaOrderBuilder = new PizzaOrderBuilder($pizzaOrder);
 $pizzaOrderBuilder->build();
 $pizzaList = $pizzaOrderBuilder->getOrder()->getPizzaList();
 
-/*$discountList = [
+$discountList = [
     new \pizza\discount\SumDiscount(500, 2),
     new \pizza\discount\SumDiscount(700, 3),
     new \pizza\discount\SumDiscount(1000, 5),
+    new \pizza\discount\SumDiscount(850, 4),
 ];
 $discountChain = new \pizza\discount\DiscountChain($pizzaOrderBuilder->getOrder());
 $discountChain->setDiscountList($discountList);
-$discountReport = new \pizza\discount\DiscountReport($discountChain);
-echo $discountReport->init();*/
+echo $discountChain->calc() . "\r\n";
 
+$discountReport = new \pizza\discount\DiscountReport($discountChain);
+echo $discountReport->init();
+exit;
 /*$baseDiscount = new \pizza\discount\SumDiscount(500, 5);
 $pizzaOrderBuilder->getOrder()->setDiscount($baseDiscount);
 echo $pizzaOrderBuilder->getOrder()->getPrice() . "\r\n";
