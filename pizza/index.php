@@ -44,3 +44,6 @@ foreach ($pizzaList as $pizza) {
 
 
 //echo $pizzaOrderBuilder->getOrder()->getPrice();
+
+// сортировка слиянием
+// быстрая сортировка

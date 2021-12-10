@@ -60,9 +60,6 @@ class DiscountChain
     public function calc()
     {
         $iterator = new DiscountIterator($this->discountList);
-        while ($iterator->hasNext()) {
-            $discount = $iterator->next();
-        }
-        return isset($discount) ? $discount->calc() : 0;
+        return $iterator->next();
     }
 }

@@ -22,23 +22,29 @@ class DiscountIterator
     public $position;
 
     /**
+     * @var array
+     */
+    private $discountCalcList;
+
+    /**
      * DiscountIterator constructor.
      * @param array $discountList
      */
     public function __construct(array $discountList)
     {
         $this->discountList = $discountList;
+        $this->discountCalcList = [];
         $this->position = 0;
     }
 
     public function setDiscountList(array $discountList)
     {
         foreach ($discountList as $discount) {
-            $this->addDiscountList($discount);
+            $this->addDiscount($discount);
         }
     }
 
-    public function addDiscountList(BaseDiscount $discount)
+    public function addDiscount(BaseDiscount $discount)
     {
         $this->discountList[] = $discount;
     }
@@ -51,17 +57,21 @@ class DiscountIterator
         return false;
     }
 
-    public function next(): BaseDiscount
+    public function getDiscountCalcList(): array
     {
-        if($this->position > 0 &&
-            $this->discountList[$this->position - 1]->calc() > $this->discountList[$this->position]->calc()
-        ) {
-            $discount = $this->discountList[$this->position];
-            $this->discountList[$this->position] = $this->discountList[$this->position - 1];
-            $this->discountList[$this->position - 1] = $discount;
+        if(empty($this->discountCalcList)) {
+            foreach ($this->discountList as $discount) {
+                $this->discountCalcList[] = $discount->calc();
+            }
+            rsort($this->discountCalcList);
         }
-        $discount = $this->discountList[$this->position];
+        return $this->discountCalcList;
+    }
+
+    public function next(): float
+    {
+        $sum = $this->getDiscountCalcList()[$this->position];
         $this->position++;
-        return $discount;
+        return $sum;
     }
 }
