@@ -11,37 +11,20 @@ abstract class CarrierChain
     /**
      * @var CarrierChain
      */
-    private $nextCarrier;
+    private $next;
 
-    /**
-     * @var Carrier
-     */
-    private $carrier;
+    abstract public function getCount();
 
-    protected function setCarrier(Carrier $carrier)
+    public function setNext(CarrierChain $carrierChain): CarrierChain
     {
-        $this->carrier = $carrier;
-    }
-
-    public function getCarrier()
-    {
-        return $this->carrier;
-    }
-
-    public function setNextCarrier(CarrierChain $carrierChain): CarrierChain
-    {
-        $this->nextCarrier = $carrierChain;
+        $this->next = $carrierChain;
         return $carrierChain;
     }
 
     public function handler(array $pizzaOrder)
     {
-        $pizzaOrder = $this->setPizzaOrder($pizzaOrder);
-        if ($this->nextCarrier) {
-            return $this->nextCarrier->handler($pizzaOrder);
+        if ($this->next) {
+           $this->next->handler($pizzaOrder);
         }
-        return null;
     }
-
-    abstract public function setPizzaOrder(array $pizzaOrder);
 }

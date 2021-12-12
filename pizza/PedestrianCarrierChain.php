@@ -8,16 +8,17 @@
  */
 class PedestrianCarrierChain extends CarrierChain
 {
-    public function setPizzaOrder(array $pizzaOrder)
+    public function getCount()
     {
-        $this->setCarrier(new PedestrianCarrier());
+        return 3;
+    }
 
-        if(count($pizzaOrder) < $this->getCarrier()->getCount()) {
-            $this->getCarrier()->addOrderList($pizzaOrder);
-        } else {
-            $this->getCarrier()->addOrderList(array_slice($pizzaOrder, 0, $this->getCarrier()->getCount()));
-            $pizzaOrder = array_slice($pizzaOrder, $this->getCarrier()->getCount() + 1);
+    public function handler(array $pizzaOrder)
+    {
+        if(count($pizzaOrder) <= $this->getCount()) {
+            echo "Пешеход " . count($pizzaOrder) . "\r\n";
+            exit;
         }
-        return $pizzaOrder;
+        parent::handler($pizzaOrder);
     }
 }

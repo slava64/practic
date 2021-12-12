@@ -8,15 +8,17 @@
  */
 class DriverCarrierChain extends CarrierChain
 {
-    public function setPizzaOrder(array $pizzaOrder)
+    public function getCount()
     {
-        $this->setCarrier(new DriverCarrier());
+        return 6;
+    }
 
-        if (count($pizzaOrder) > $this->getCarrier()->getCount()) {
-            $this->getCarrier()->addOrderList($pizzaOrder);
-            return [];
-        } else {
-            return $pizzaOrder;
+    public function handler(array $pizzaOrder)
+    {
+        if (count($pizzaOrder) >= $this->getCount()) {
+            echo "Водитель: " . count($pizzaOrder) . "\r\n";
+            exit;
         }
+        parent::handler($pizzaOrder);
     }
 }

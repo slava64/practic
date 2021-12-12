@@ -61,7 +61,8 @@ class DiscountIterator
     {
         if(empty($this->discountCalcList)) {
             foreach ($this->discountList as $discount) {
-                $this->discountCalcList[] = $discount->calc();
+                //$this->discountCalcList[] = [$discount->calc(), $discount->name()];usort();
+                $this->discountCalcList[][] = $discount->calc();
             }
             rsort($this->discountCalcList);
         }

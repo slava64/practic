@@ -9,6 +9,29 @@ $pizzaOrderBuilder = new PizzaOrderBuilder($pizzaOrder);
 $pizzaOrderBuilder->build();
 $pizzaList = $pizzaOrderBuilder->getOrder()->getPizzaList();
 
+/*
+$carrierChainList = [new PedestrianCarrierChain(), new DriverCarrierChain(), new BicyclistCarrierChain()];
+usort($carrierChainList, function(CarrierChain $carrierChain1, CarrierChain $carrierChain2){
+    if ($carrierChain1->getCount() == $carrierChain2->getCount()) {
+        return 0;
+    }
+    return ($carrierChain1->getCount() < $carrierChain2->getCount()) ? -1 : 1;
+});
+foreach ($carrierChainList as $carrierChain) {
+    echo $carrierChain->getCount();
+}
+exit;*/
+
+
+$carrier = new PedestrianCarrierChain();
+$carrier->setNext(new BicyclistCarrierChain())->setNext(new DriverCarrierChain());
+$carrier->handler([1,2,3,4]);
+exit;
+
+
+
+
+
 $discountList = [
     new \pizza\discount\SumDiscount(500, 2),
     new \pizza\discount\SumDiscount(700, 3),
